@@ -49,6 +49,30 @@ feature 'playing a game' do
     expect(page).to have_content 'Opponent chose Scissors!'
   end
 
+  # As a marketeer
+  # So I can play a game
+  # I want to see a winner
+  context 'end game' do
+    before do
+      srand(PLAY_SEED)
+    end
+
+    scenario 'I win' do
+      click_button 'Rock'
+      expect(page).to have_content 'You win!'
+    end
+
+    scenario 'I lose' do
+      click_button 'Paper'
+      expect(page).to have_content 'You lose!'
+    end
+
+    scenario 'I draw' do
+      click_button 'Scissors'
+      expect(page).to have_content 'You draw!'
+    end
+  end
+
   def possible_messages
     [:rock, :paper, :scissors].map { |shape| "Opponent chose #{shape.to_s.capitalize}!" }
   end
